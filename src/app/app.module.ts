@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { CustomerComponent } from './customer/customer.component';
 import { NavComponent } from './nav/nav.component';
 import { PostComponent } from './post/post.component';
+import { AlertifyService } from './services/alertify.service';
 
 const routes: Routes = [
   { path: "posts", component: PostComponent },
@@ -29,7 +30,7 @@ const routes: Routes = [
     AppRoutingModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [AlertifyService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

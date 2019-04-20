@@ -3,7 +3,7 @@ import { Post } from './post';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { ActivatedRoute } from '@angular/router';
-declare let alertify: any ;
+import { AlertifyService } from '../services/alertify.service';
 
 @Component({
   selector: 'app-post',
@@ -13,11 +13,10 @@ declare let alertify: any ;
 export class PostComponent implements OnInit {
 
   constructor(
-    private http: HttpClient, 
+    private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    ) {
-
-    }
+    private alertifyService: AlertifyService
+  ) { }
 
   path = 'https://jsonplaceholder.typicode.com/';
 
@@ -50,7 +49,7 @@ export class PostComponent implements OnInit {
     });
   }
 
-  addToFavourite(post){
-    alertify.success("Added to favs ! ");
+  addToFavourites(post) {
+    this.alertifyService.success("Added to Favourites: " + post.title);
   }
 }
