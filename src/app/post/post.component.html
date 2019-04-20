@@ -6,7 +6,8 @@
     <strong *ngFor="let user of users">
       <span routerLink="/posts/{{user.id}}" class="badge badge-info">{{user.name}}</span>
     </strong>
-    <div *ngFor="let post of posts" class="media text-muted pt-3">
+    <input class="form-control mr-sm-2" [(ngModel)]="filterText" type="search" placeholder="Search" aria-label="Search">
+    <div *ngFor="let post of posts | postFilter:filterText" class="media text-muted pt-3">
       <svg class="bd-placeholder-img mr-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 32x32">
         <title>Placeholder</title>
@@ -22,5 +23,4 @@
       <a href="#">All updates</a>
     </small>
   </div>
-
 </main>
