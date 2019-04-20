@@ -3,6 +3,7 @@ import { Post } from './post';
 import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { ActivatedRoute } from '@angular/router';
+declare let alertify: any ;
 
 @Component({
   selector: 'app-post',
@@ -11,7 +12,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PostComponent implements OnInit {
 
-  constructor(private http: HttpClient, private activatedRoute: ActivatedRoute) {}
+  constructor(
+    private http: HttpClient, 
+    private activatedRoute: ActivatedRoute,
+    ) {
+
+    }
 
   path = 'https://jsonplaceholder.typicode.com/';
 
@@ -42,5 +48,9 @@ export class PostComponent implements OnInit {
     this.http.get<User[]>(this.path + 'users').subscribe(response => {
       this.users = response;
     });
+  }
+
+  addToFavourite(post){
+    alertify.success("Added to favs ! ");
   }
 }
