@@ -4,24 +4,28 @@ import { HttpClient } from '@angular/common/http';
 import { User } from './user';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from '../services/alertify.service';
+import { PostService } from '../post/post.service';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
-  styleUrls: ['./post.component.css']
+  styleUrls: ['./post.component.css'],
+  providers: [PostService]
 })
 export class PostComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
     private activatedRoute: ActivatedRoute,
-    private alertifyService: AlertifyService
+    private alertifyService: AlertifyService,
+    private postService: PostService
   ) { }
 
   path = 'https://jsonplaceholder.typicode.com/';
 
   posts: Post[];
   users: User[];
+  today = new Date(2019, 3, 21);
 
   ngOnInit() {
     this.getUsers();
@@ -31,21 +35,14 @@ export class PostComponent implements OnInit {
   }
 
   getPosts(userId) {
-    if (userId) {
-      const newPath = this.path + 'posts?userId=' + userId;
-      this.http.get<Post[]>(newPath).subscribe(response => {
-        this.posts = response;
-      });
-    } else {
-      this.http.get<Post[]>(this.path + 'posts').subscribe(response => {
-        this.posts = response;
-      });
-    }
+    this.postService.getPosts(userId).subscribe(data => {
+      this.posts = data
+    });
   }
 
   getUsers() {
-    this.http.get<User[]>(this.path + 'users').subscribe(response => {
-      this.users = response;
+    this.postService.getUsers().subscribe(data => {
+      this.users = data
     });
   }
 

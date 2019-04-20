@@ -1,5 +1,7 @@
 <main role="main" class="container">
   <div class="my-3 p-3 bg-white rounded shadow-sm">
+    {{today|date : 'fullDate'}}
+    {{today|date : 'shortDate'}}
     <h6 class="border-bottom border-gray pb-2 mb-0">Recently Posts</h6>
     <strong *ngFor="let user of users">
       <span routerLink="/posts/{{user.id}}" class="badge badge-info">{{user.name}}</span>
@@ -11,12 +13,11 @@
         <rect width="100%" height="100%" fill="#007bff" /><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text>
       </svg>
       <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-        <strong class="d-block text-gray-dark">{{post.title}}</strong>
-          {{post.body}}
-          <span (click)="addToFavourites(post)" class="badge badge-primary">Favourite</span>
+        <strong class="d-block text-gray-dark">{{post.title | uppercase }}</strong>
+        {{post.body}}
+        <span (click)="addToFavourites(post)" class="badge badge-primary">Favourite</span>
       </p>
     </div>
-
     <small class="d-block text-right mt-3">
       <a href="#">All updates</a>
     </small>
